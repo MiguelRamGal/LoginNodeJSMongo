@@ -52,7 +52,7 @@ app.get('/usuario', autenticacionToken.verificaToken , function (req, res) {
 })
 
 //Hago una peticion POST ayuda a crear data
-app.post('/usuario', function (req, res) {
+app.post('/usuario', [autenticacionToken.verificaToken,autenticacionToken.verificaAdministrador], function (req, res) {
     
     let info = req.body;//De esta forma obtengo la data de tipo post
     
