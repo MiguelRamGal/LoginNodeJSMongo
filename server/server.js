@@ -1,8 +1,8 @@
 const express = require('express')//Instancio mi librería express
 const mongoose = require('mongoose');//Instancio mi librería de mongoose
 
-
 const app = express()//Configuro mi express
+
 require('./config/config')//Importo mi archivo de configuraciones, en el cual tengo mis puertos etc
 
 //BODYPARSER
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 //BODYPARSER
 
 
-app.use(require('./routes/usuario'));//De esta forma importo el archivo usuario.js y para ponerlo en uso
+app.use(require('./routes/index'));//De esta forma importo el archivo index.js el cual tiene todas las imprtaciones de mis rutas
 
 
 //Conexión a MongoDB

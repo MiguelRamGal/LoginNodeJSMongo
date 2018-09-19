@@ -3,12 +3,20 @@ const bcrypt = require('bcrypt')//Hago referencia a bcrypt
 const underscore = require('underscore')//Importo el underscore
 const usuarioModel = require('../models/usuario')//Hago referencia a mi modelo de usuario
 
+const autenticacionToken = require('../middlewares/autenticacion')//Importo el archivo de autenticación
 
 const app = express()//Configuro mi express
 
 
 //Hago una peticion GET ayuda a modificar data
-app.get('/usuario', function (req, res) {
+//El parametro que sigue de '/usuario' y antes del callback es un middleware
+app.get('/usuario', autenticacionToken.verificaToken , function (req, res) {
+    
+    return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    })
     
     let desde = req.query.desde || 0;//Los elementos opcionales (tipo GET url?desde=10) se guadan en req.query, si hay un valor lo guardo si no pongo desde 0
     desde = Number(desde)//Lo converto en un número
@@ -44,7 +52,7 @@ app.get('/usuario', function (req, res) {
 })
 
 //Hago una peticion POST ayuda a crear data
-app.post('/usuario', function (req, res) {
+app.post('/usuario', [autenticacionToken.verificaToken,autenticacionToken.verificaAdministrador], function (req, res) {
     
     let info = req.body;//De esta forma obtengo la data de tipo post
     
@@ -77,7 +85,7 @@ app.post('/usuario', function (req, res) {
 //Hago una peticion PUT ayuda a modificar data
 //Con este código indico /usuario/:id que si la url acontinuacioón viene con un valo por ejemplo /usuario/sdfsdfsdfsdf
 //a ese valor le daré la variable de id
-app.put('/usuario/:id', function (req, res) {
+app.put('/usuario/:id', [autenticacionToken.verificaToken,autenticacionToken.verificaAdministrador], function (req, res) {
     
     let idUsuario = req.params.id; //De esta Forma obtengo el valor de /:id que estoy reciviendo en mi petición
     let info = underscore.pick(req.body,['nombre','email','img','role','estado']);//Obtengo la información del cuerpo
@@ -106,7 +114,7 @@ app.put('/usuario/:id', function (req, res) {
 })
 
 //Hago una peticion DELETE para eliminar data
-app.delete('/usuario/:idUsuario', function (req, res) {
+app.delete('/usuario/:idUsuario', [autenticacionToken.verificaToken,autenticacionToken.verificaAdministrador], function (req, res) {
     let id = req.params.idUsuario;
 
     //DE ESTA FORMA ELIMINO UN REGISTRO DEFINITIVAMENTE

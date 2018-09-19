@@ -22,3 +22,18 @@ if(process.env.NODE_ENV === 'dev'){
 }
 
 process.env.URLDB = urlBD;//Asigno a una variable de proccess mi cadena de conexión para poder utilizarla
+
+
+//===============================
+//VENCIMIENTO DEL TOKEN
+//60 segundos
+//60 minutos
+//24 horas
+//30 días
+//===============================
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;//Creo una variable para la fecha de expiración de los TOKEN
+
+//===============================
+//SEED
+//===============================
+process.env.SEED = 'este-es-el-seed-de-desarrollo';
