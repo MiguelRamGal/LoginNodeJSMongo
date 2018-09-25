@@ -1,6 +1,6 @@
 const express = require('express')//Instancio mi librería express
 const mongoose = require('mongoose');//Instancio mi librería de mongoose
-
+const path = require('path')
 const app = express()//Configuro mi express
 
 require('./config/config')//Importo mi archivo de configuraciones, en el cual tengo mis puertos etc
@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 //BODYPARSER
+
+//Habilitar la carpeta public
+app.use(express.static( path.resolve(__dirname, '../public')))
 
 
 app.use(require('./routes/index'));//De esta forma importo el archivo index.js el cual tiene todas las imprtaciones de mis rutas

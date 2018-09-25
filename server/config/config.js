@@ -37,3 +37,8 @@ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;//Creo una variable para la fech
 //SEED
 //===============================
 process.env.SEED = 'este-es-el-seed-de-desarrollo';
+
+//===============================
+//GOOGLE CLIENT ID
+//===============================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '139636707261-i9c3q2jo24c208jdljvept5emp96un5b.apps.googleusercontent.com';
