@@ -12,11 +12,11 @@ const app = express()//Configuro mi express
 //El parametro que sigue de '/usuario' y antes del callback es un middleware
 app.get('/usuario', autenticacionToken.verificaToken , function (req, res) {
     
-    return res.json({
+    /*return res.json({
         usuario: req.usuario,
         nombre: req.usuario.nombre,
         email: req.usuario.email
-    })
+    })*/
     
     let desde = req.query.desde || 0;//Los elementos opcionales (tipo GET url?desde=10) se guadan en req.query, si hay un valor lo guardo si no pongo desde 0
     desde = Number(desde)//Lo converto en un número
@@ -116,30 +116,6 @@ app.put('/usuario/:id', [autenticacionToken.verificaToken,autenticacionToken.ver
 //Hago una peticion DELETE para eliminar data
 app.delete('/usuario/:idUsuario', [autenticacionToken.verificaToken,autenticacionToken.verificaAdministrador], function (req, res) {
     let id = req.params.idUsuario;
-
-    //DE ESTA FORMA ELIMINO UN REGISTRO DEFINITIVAMENTE
-    /*usuarioModel.findByIdAndRemove(id,(err, usuarioBorrado)=>{
-        if(err){
-            return res.status(400).json({
-                ok:false,
-                err
-            })
-        }else{
-
-            if(!usuarioBorrado){
-                return res.status(400).json({
-                    ok:false,
-                    err:{
-                        message: 'Usuario no encontrado'
-                    }
-                })
-            }
-            res.json({
-                ok:true,
-                usuario:usuarioBorrado
-            })
-        }
-    });*/
 
     //DE ESTA FORMA ELIMINO UN REGISTRO DE FORMA LÓGICA
     let objetoMod = {

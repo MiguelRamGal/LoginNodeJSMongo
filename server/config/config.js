@@ -31,7 +31,7 @@ process.env.URLDB = urlBD;//Asigno a una variable de proccess mi cadena de conex
 //24 horas
 //30 días
 //===============================
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;//Creo una variable para la fecha de expiración de los TOKEN
+process.env.CADUCIDAD_TOKEN = '48h';//Creo una variable para la fecha de expiración de los TOKEN
 
 //===============================
 //SEED
