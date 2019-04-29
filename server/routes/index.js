@@ -6,5 +6,7 @@ app.use(require('./usuario'));//De esta forma importo el archivo usuario.js para
 app.use(require('./login'));//De esta forma importo el archivo login.js para ponerlo en uso
 app.use(require('./categoria'));
 app.use(require('./producto'));
+app.use(require('./upload'));
+app.use(require('./imagenes'));
 
 module.exports = app;
